@@ -1,0 +1,37 @@
+name: r1_wallet
+description: A new Flutter project.
+
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.2
+
+  # QR-коды
+  qr_flutter: ^4.1.0
+
+  # Выбор файлов (будет нужен позже)
+  file_picker: ^8.1.2
+
+  # Хэширование (для PIN)
+  crypto: ^3.0.3
+
+  # Хранение PIN, seed, токенов
+  shared_preferences: ^2.3.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/

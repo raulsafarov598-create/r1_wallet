@@ -1,0 +1,42 @@
+                const SizedBox(width: 70, height: 70),
+                buildButton("0"),
+                InkWell(
+                  onTap: deleteDigit,
+                  child: Container(
+                    alignment: Alignment.center,
+                    height: 70,
+                    width: 70,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.grey.shade900,
+                    ),
+                    child: const Icon(Icons.backspace, color: Colors.white),
+                  ),
+                )
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class PlaceholderScreen extends StatelessWidget {
+  const PlaceholderScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Scaffold(
+      backgroundColor: Colors.black,
+      body: Center(
+        child: Text(
+          'Главный экран будет тут',
+          style: TextStyle(color: Colors.white),
+        ),
+      ),
+    );
+  }
+}
+
+

@@ -1,0 +1,144 @@
+import 'package:flutter/material.dart';
+
+class PinScreen extends StatefulWidget {
+  const PinScreen({super.key});
+
+  @override
+  State<PinScreen> createState() => _PinScreenState();
+}
+
+class _PinScreenState extends State<PinScreen> {
+  List<String> pin = [];
+
+  void addDigit(String digit) {
+    if (pin.length < 4) {
+      setState(() {
+        pin.add(digit);
+      });
+
+      if (pin.length == 4) {
+        Future.delayed(const Duration(milliseconds: 300), () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (_) => const PlaceholderScreen()),
+          );
+        });
+      }
+    }
+  }
+
+  void deleteDigit() {
+    if (pin.isNotEmpty) {
+      setState(() {
+        pin.removeLast();
+      });
+    }
+  }
+
+  Widget buildPinDots() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: List.generate(4, (index) {
+        bool filled = index < pin.length;
+        return Container(
+          margin: const EdgeInsets.symmetric(horizontal: 8),
+          width: 18,
+          height: 18,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color: filled ? Colors.white : Colors.grey.shade800,
+          ),
+        );
+      }),
+    );
+  }
+
+  Widget buildButton(String number) {
+    return InkWell(
+      borderRadius: BorderRadius.circular(50),
+      onTap: () => addDigit(number),
+      child: Container(
+        alignment: Alignment.center,
+        height: 70,
+        width: 70,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          color: Colors.grey.shade900,
+        ),
+        child: Text(
+          number,
+          style: const TextStyle(
+            fontSize: 30,
+            fontWeight: FontWeight.w600,
+            color: Colors.white,
+          ),
+        ),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.black,
+      body: SafeArea(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text(
+              'Введите PIN-код',
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.w600,
+                color: Colors.white,
+              ),
+            ),
+            const SizedBox(height: 30),
+            buildPinDots(),
+            const SizedBox(height: 40),
+            Wrap(
+              alignment: WrapAlignment.center,
+              spacing: 30,
+              runSpacing: 30,
+              children: [
+                for (var i = 1; i <= 9; i++) buildButton(i.toString()),
+                const SizedBox(width: 70, height: 70),
+                buildButton("0"),
+                InkWell(
+                  onTap: deleteDigit,
+                  child: Container(
+                    alignment: Alignment.center,
+                    height: 70,
+                    width: 70,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.grey.shade900,
+                    ),
+                    child: const Icon(Icons.backspace, color: Colors.white),
+                  ),
+                )
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class PlaceholderScreen extends StatelessWidget {
+  const PlaceholderScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Scaffold(
+      backgroundColor: Colors.black,
+      body: Center(
+        child: Text(
+          'Главный экран будет тут',
+          style: TextStyle(color: Colors.white),
+        ),
+      ),
+    );
+  }
+}
