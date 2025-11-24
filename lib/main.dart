@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'start_screen.dart';
-import 'pin_screen.dart';
-import 'seed_phrase_screen.dart';
 import 'main_tabs.dart';
+import 'pin_screen.dart';
+import 'start_screen.dart';
 
 void main() {
   runApp(const R1WalletApp());
@@ -13,7 +12,7 @@ class R1WalletApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Color seedColor = Colors.deepPurple;
+    const Color seedColor = Colors.deepPurple;
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -37,15 +36,31 @@ class R1WalletApp extends StatelessWidget {
           selectedItemColor: Colors.white,
           unselectedItemColor: Colors.grey,
         ),
+        inputDecorationTheme: const InputDecorationTheme(
+          filled: true,
+          fillColor: Color(0xFF111827),
+          border: OutlineInputBorder(
+            borderSide: BorderSide(color: Color(0xFF374151)),
+            borderRadius: BorderRadius.all(Radius.circular(12)),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Color(0xFF374151)),
+            borderRadius: BorderRadius.all(Radius.circular(12)),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Color(0xFF6366F1)),
+            borderRadius: BorderRadius.all(Radius.circular(12)),
+          ),
+          labelStyle: TextStyle(color: Colors.white70),
+          hintStyle: TextStyle(color: Colors.white38),
+        ),
       ),
-      initialRoute: '/',
+      initialRoute: '/pin',
       routes: {
         '/': (context) => const StartScreen(),
         '/pin': (context) => const PinScreen(),
-        '/seed': (context) => const SeedPhraseScreen(),
         '/main': (context) => const MainTabs(),
       },
     );
   }
 }
-
